@@ -1,19 +1,19 @@
 public class CollaborativeFiltering {
     public static int findNumberOfInversions(int[] A, int[] B) {
-        int[] aux = new int[A.length];
-        int[] lookup = new int[A.length];
+        int[] aux = new int[B.length]; // used B's length as we are sorting and merging the array B
+        int[] lookup = new int[1000000];
 
         for (int i = 0; i < A.length; i++) {
-            lookup[A[i] - 1] = i; //create lookup table in case of unsorted array A
+            lookup[A[i]] = i + 1; //create lookup table in case of unsorted array A
         }
 
         int[] newB = new int[B.length]; //create new array to not overwrite B array
 
         for (int i = 0; i < B.length; i++) {
-            newB[i] = lookup[B[i] - 1]; //decide the numbers of the elements from lookup table
+            newB[i] = lookup[B[i]]; //decide the numbers of the elements from lookup table
         }
 
-        return findNumberOfInversions(newB, aux, 0, A.length - 1);
+        return findNumberOfInversions(newB, aux, 0, B.length - 1); //passed B's length
     }
 
     public static int findNumberOfInversions(int[] B, int[] aux, int low, int high) {
@@ -69,12 +69,3 @@ public class CollaborativeFiltering {
         System.out.println(n);
     }
 }
-
-
-
-
-
-
-
-
-
